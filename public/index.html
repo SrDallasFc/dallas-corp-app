@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuchi Proyecto | SAHD Solutions</title>
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #38bdf8;
+            --bg-color: #f8fafc;
+            --text-color: #334155;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .siglas {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        .feature-card {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+        .feature-card h3 {
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        .feature-card p {
+            margin: 0;
+            font-size: 0.85rem;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cuchi Proyecto</h1>
+        <div class="siglas">SAHD — Secure Application Hardening & Defense</div>
+        
+        <p>
+            Bienvenido a la plataforma oficial de <strong>Cuchi Desvios de fondos</strong>. Somos una empresa líder especializada en el 
+            desarrollo e implementación avanzada de seguridad en aplicaciones ya creadas, blindando los sistemas de software 
+            contra vulnerabilidades emergentes y amenazas cibernéticas complejas.
+        </p>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Code Auditing</h3>
+                <p>Análisis estático y dinámico de código fuente para la detección temprana de brechas de seguridad.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Application Hardening</h3>
+                <p>Fortalecimiento de arquitecturas de software existentes para resistir ataques informáticos avanzados.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            Desplegado exitosamente en Azure App Service (PaaS) | Node.js Environment
+        </div>
+    </div>
+
+</body>
+</html>
