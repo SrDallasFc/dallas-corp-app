@@ -1,0 +1,62 @@
+trigger:
+  - main
+
+variables:
+  azureSubscription: 'Azure-ServiceConnection'
+  webAppName: 'PracticaV1-ISC'
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: BuildAndTest
+  displayName: 'Fase CI: Build y Pruebas'
+  jobs:
+  - job: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Instalar Node.js'
+
+    - script: |
+        npm install
+        npm test
+      displayName: 'Instalar dependencias y ejecutar pruebas'
+
+    - task: ArchiveFiles@2
+      displayName: 'Empaquetar código'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publicar Artefacto'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+
+- stage: Deploy
+  displayName: 'Fase CD: Despliegue en la Nube'
+  dependsOn: BuildAndTest
+  condition: succeeded()
+  jobs:
+  - deployment: DeployWebApp
+    pool:
+      vmImage: $(vmImageName)
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Desplegar en Azure App Service'
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              appType: 'webAppLinux'
+              appName: '$(webAppName)'
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              startUpCommand: 'npm start'
