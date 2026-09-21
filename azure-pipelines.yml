@@ -14,16 +14,15 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    # Usamos la tarea actualizada UseNode@1 en lugar de NodeTool@0
     - task: UseNode@1
       inputs:
         version: '18.x'
       displayName: 'Instalar Node.js'
 
     - script: |
-        npm ci || npm install
-        npx jest --detectOpenHandles
-      displayName: 'Instalar dependencias y ejecutar pruebas con Jest'
+        npm install
+        npm test -- --watchAll=false
+      displayName: 'Instalar dependencias y ejecutar pruebas'
 
     - task: ArchiveFiles@2
       displayName: 'Empaquetar código'
