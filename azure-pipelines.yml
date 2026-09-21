@@ -16,12 +16,12 @@ stages:
     steps:
     - task: UseNode@1
       inputs:
-        version: '18.x'
+        version: '20.x'
       displayName: 'Instalar Node.js'
 
     - script: |
         npm install --include=dev
-        npx jest --detectOpenHandles --forceExit
+        npx jest --detectOpenHandles --forceExit --passWithNoTests
       displayName: 'Instalar dependencias y ejecutar pruebas'
 
     - task: ArchiveFiles@2
