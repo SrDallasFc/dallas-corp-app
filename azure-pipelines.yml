@@ -20,8 +20,8 @@ stages:
       displayName: 'Instalar Node.js'
 
     - script: |
-        npm install
-        npm test -- --watchAll=false
+        npm install --include=dev
+        npx jest --detectOpenHandles --forceExit
       displayName: 'Instalar dependencias y ejecutar pruebas'
 
     - task: ArchiveFiles@2
@@ -59,4 +59,4 @@ stages:
               appType: 'webAppLinux'
               appName: '$(webAppName)'
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-              startUpCommand: 'npm start'
+              startUpCommand: 'node server.js'
